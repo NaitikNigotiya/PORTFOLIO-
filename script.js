@@ -71,31 +71,47 @@ lightbox.addEventListener('click', () => {
 
 // ===== CONTACT FORM =====
 const contactForm = document.getElementById('contact-form');
+
 contactForm.addEventListener('submit', function(e) {
   e.preventDefault();
+
   const formData = new FormData(this);
   const btn = this.querySelector('.form-submit');
   const originalText = btn.textContent;
+
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
   fetch(this.action, {
     method: 'POST',
     body: formData,
-    headers: { 'Accept': 'application/json' }
+    headers: {
+      'Accept': 'application/json'
+    }
   })
   .then(response => {
     if (response.ok) {
-      btn.textContent = 'Message Sent! ✓';
+      btn.textContent = 'Message Sent ✓';
       btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+      btn.style.transform = 'scale(1.02)';
+      btn.style.boxShadow = '0 0 20px rgba(46, 204, 113, 0.4)';
       this.reset();
-      setTimeout(() => { btn.textContent = originalText; btn.style.background = ''; btn.disabled = false; }, 3000);
-    } else { throw new Error('Failed'); }
+    } else {
+      throw new Error('Failed');
+    }
   })
   .catch(() => {
     btn.textContent = 'Error. Try again.';
     btn.disabled = false;
-    setTimeout(() => { btn.textContent = originalText; }, 3000);
+  })
+  .finally(() => {
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+      btn.style.transform = '';
+      btn.style.boxShadow = '';
+      btn.disabled = false;
+    }, 3000);
   });
 });
 
