@@ -3,32 +3,7 @@ document.getElementById('stat-projects').textContent = document.querySelectorAll
 document.getElementById('stat-certificates').textContent = document.querySelectorAll('.certificate-card').length + '+';
 document.getElementById('stat-experience').textContent = document.querySelector('.experience-block .timeline').querySelectorAll('.timeline-item').length + '+';
 
-// ===== CUSTOM CURSOR =====
-const cursorDot = document.getElementById('cursor-dot');
-const cursorRing = document.getElementById('cursor-ring');
-let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
 
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  cursorDot.style.left = mouseX + 'px';
-  cursorDot.style.top = mouseY + 'px';
-});
-
-function animateRing() {
-  ringX += (mouseX - ringX) * 0.15;
-  ringY += (mouseY - ringY) * 0.15;
-  cursorRing.style.left = ringX + 'px';
-  cursorRing.style.top = ringY + 'px';
-  requestAnimationFrame(animateRing);
-}
-animateRing();
-
-const hoverTargets = document.querySelectorAll('a, button, .skill-card, .project-card, .certificate-card, .report-card, .social-link, .btn, .nav-cta');
-hoverTargets.forEach(el => {
-  el.addEventListener('mouseenter', () => { cursorDot.classList.add('hover'); cursorRing.classList.add('hover'); });
-  el.addEventListener('mouseleave', () => { cursorDot.classList.remove('hover'); cursorRing.classList.remove('hover'); });
-});
 
 // ===== NAVBAR SCROLL =====
 const navbar = document.querySelector('.navbar');
