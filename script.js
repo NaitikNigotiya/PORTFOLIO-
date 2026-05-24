@@ -53,20 +53,31 @@ revealElements.forEach(el => revealObserver.observe(el));
 // ===== LIGHTBOX =====
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = lightbox.querySelector('img');
+const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+const lightboxClose = lightbox.querySelector('.lightbox-close');
 
 document.querySelectorAll('.certificate-card').forEach(card => {
   card.addEventListener('click', () => {
     const img = card.querySelector('img');
+    const title = card.querySelector('h3').textContent;
     lightboxImg.src = img.src;
     lightboxImg.alt = img.alt;
+    lightboxCaption.textContent = title;
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
   });
 });
 
-lightbox.addEventListener('click', () => {
+const closeLightbox = () => {
   lightbox.classList.remove('active');
   document.body.style.overflow = '';
+};
+
+lightbox.addEventListener('click', (e) => {
+  // Close if clicking outside the image/caption, or if clicking the close button
+  if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+    closeLightbox();
+  }
 });
 
 // ===== CONTACT FORM =====

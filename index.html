@@ -69,7 +69,7 @@
         <p>I’m constantly exploring new technologies, refining my skills, and focusing on creating solutions that are not just functional, but also intuitive and visually engaging.</p>
         <div class="about-stats">
           <div class="stat"><span class="stat-number" id="stat-projects">5</span><span class="stat-label">Projects</span></div>
-          <div class="stat"><span class="stat-number" id="stat-certificates">3</span><span class="stat-label">Certificates</span></div>
+          <div class="stat"><span class="stat-number" id="stat-certificates">2</span><span class="stat-label">Certificates</span></div>
           <div class="stat"><span class="stat-number" id="stat-experience">1</span><span class="stat-label">Experience</span></div>
         </div>
       </div>
@@ -171,23 +171,52 @@
   <div class="container">
     <div class="section-header reveal"><p class="section-subtitle">Achievements</p><h2 class="section-title">Certificates</h2></div>
     <div class="certificates-grid">
-      <div class="certificate-card reveal" style="max-width: 400px; margin: 0 auto;">
+      
+      <!-- Certificate 1 -->
+      <div class="certificate-card reveal">
         <div class="certificate-image">
-          <img src="assets/images/certificate.png" alt="Electronic Circuits and Number System">
+          <img src="assets/images/certificates/certificate.png" alt="Electronic Circuits and Number System">
+          <div class="certificate-hover">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="zoom-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </div>
         </div>
         <div class="certificate-info">
-          <h3>Electronic Circuits and Number System</h3>
+          <h3>Electronic Circuits & Number System</h3>
           <div class="certificate-meta">
             Issued By: <strong>Infosys Springboard</strong><br>
             Recipient: <strong>Naitik Nigotiya</strong><br>
             Date: <strong>February 28, 2026</strong>
           </div>
-          <p>Completed course covering electronic circuits and number systems.</p>
+          <p>Completed course covering basic electronic circuits, logic gates, and digital number systems, laying a solid foundation for digital electronics.</p>
           <div class="certificate-links">
             <button class="btn btn-outline">View Certificate</button>
           </div>
         </div>
       </div>
+
+      <!-- Certificate 2 -->
+      <div class="certificate-card reveal">
+        <div class="certificate-image">
+          <img src="assets/images/certificates/Certificate_Naitik_Nigotiya.png" alt="Hackaccino 4.0 Certificate">
+          <div class="certificate-hover">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="zoom-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </div>
+        </div>
+        <div class="certificate-info">
+          <h3>Hackaccino 4.0</h3>
+          <div class="certificate-meta">
+            Type: <strong>Official Hackathon Participation</strong><br>
+            Organizers: <strong>Bennett University & HackCulture</strong><br>
+            Recipient: <strong>Naitik Nigotiya</strong><br>
+            Date: <strong>13 April 2026</strong>
+          </div>
+          <p>Recognized participant of Hackaccino 4.0, a 24-hour innovation-focused hackathon conducted under Bennett University’s technical community ecosystem in collaboration with HackCulture.</p>
+          <div class="certificate-links">
+            <button class="btn btn-outline">View Certificate</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -298,7 +327,11 @@
 </footer>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox"><img src="" alt="Certificate Preview"></div>
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img src="" alt="Certificate Preview">
+  <div class="lightbox-caption">Certificate Preview</div>
+</div>
 
 <script src="script.js"></script>
 </body>
