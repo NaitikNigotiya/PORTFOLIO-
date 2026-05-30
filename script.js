@@ -14,17 +14,41 @@ window.addEventListener('scroll', () => {
 // ===== MOBILE NAV TOGGLE =====
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
+const navBackdrop = document.getElementById('nav-backdrop');
+
+function openMenu() {
+  navMenu.classList.add('active');
+  navToggle.classList.add('active');
+  if (navBackdrop) navBackdrop.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  navMenu.classList.remove('active');
+  navToggle.classList.remove('active');
+  if (navBackdrop) navBackdrop.classList.remove('active');
+  document.body.style.overflow = '';
+}
 
 navToggle.addEventListener('click', () => {
-  navMenu.classList.toggle('active');
-  navToggle.classList.toggle('active');
+  navMenu.classList.contains('active') ? closeMenu() : openMenu();
 });
 
+// Close on backdrop tap
+if (navBackdrop) navBackdrop.addEventListener('click', closeMenu);
+
+// Close when any nav link is clicked
 document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', () => {
-    navMenu.classList.remove('active');
-    navToggle.classList.remove('active');
-  });
+  link.addEventListener('click', closeMenu);
+});
+
+// Close when "LET'S TALK" (nav-cta) is clicked
+const navCta = document.querySelector('.nav-cta');
+if (navCta) navCta.addEventListener('click', closeMenu);
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeMenu();
 });
 
 // ===== SMOOTH SCROLL =====
