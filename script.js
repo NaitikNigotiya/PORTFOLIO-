@@ -37,29 +37,40 @@ navToggle.addEventListener('click', () => {
 // Close on backdrop tap
 if (navBackdrop) navBackdrop.addEventListener('click', closeMenu);
 
-// Close when any nav link is clicked
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', closeMenu);
-});
-
-// Close when "LET'S TALK" (nav-cta) is clicked
-const navCta = document.querySelector('.nav-cta');
-if (navCta) navCta.addEventListener('click', closeMenu);
-
 // Close on Escape key
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeMenu();
 });
 
 // ===== SMOOTH SCROLL =====
+// Handles ALL anchor links — nav links, nav-cta, hero buttons, etc.
+function smoothScrollTo(targetSelector) {
+  const target = document.querySelector(targetSelector);
+  if (!target) return;
+
+  const isMobileMenuOpen = navMenu.classList.contains('active');
+
+  const doScroll = () => {
+    const offset = navbar.offsetHeight + 20;
+    const position = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: position, behavior: 'smooth' });
+  };
+
+  if (isMobileMenuOpen) {
+    // Close the menu first, then scroll after the slide-out animation (350ms) finishes
+    closeMenu();
+    setTimeout(doScroll, 380);
+  } else {
+    doScroll();
+  }
+}
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      const offset = navbar.offsetHeight + 20;
-      const position = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top: position, behavior: 'smooth' });
+    const href = this.getAttribute('href');
+    if (href && href.length > 1) {
+      e.preventDefault();
+      smoothScrollTo(href);
     }
   });
 });

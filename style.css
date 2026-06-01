@@ -146,9 +146,10 @@ button, input, textarea { font-family: inherit; }
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(4px);
   opacity: 0;
+  pointer-events: none;
   transition: opacity var(--transition);
 }
-.nav-backdrop.active { opacity: 1; }
+.nav-backdrop.active { opacity: 1; pointer-events: auto; }
 
 
 
@@ -624,7 +625,7 @@ button, input, textarea { font-family: inherit; }
   }
   .nav-menu.active { right: 0; }
   .nav-toggle { display: flex; }
-  .nav-backdrop { display: block; }
+  .nav-backdrop { display: block; pointer-events: none; }
 
   .nav-link { font-size: 1rem; }
   .nav-cta { width: 100%; text-align: center; }
