@@ -1,0 +1,32 @@
+# ===== ENVIRONMENT & SECRETS =====
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+*.pem
+*.key
+secrets.js
+config.local.js
+
+# ===== OS FILES =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== EDITOR =====
+.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ===== LOGS =====
+*.log
+npm-debug.log*
+
+# ===== NODE (if added later) =====
+node_modules/
+dist/
+.cache/
