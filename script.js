@@ -322,6 +322,31 @@ if (serviceChips.length > 0 && serviceSelect) {
 // ════════════════════════════════════════════════════════════
 // STAT COUNTER ANIMATION
 // ════════════════════════════════════════════════════════════
+// Dynamically calculate and update stat counts on page load
+(function initDynamicStats() {
+  const projectsCount = document.querySelectorAll('#projects .project-card').length;
+  const certificatesCount = document.querySelectorAll('#certificates .certificate-card').length;
+  const firstExpBlock = document.querySelector('#experience .experience-block');
+  const rolesCount = firstExpBlock ? firstExpBlock.querySelectorAll('.timeline-item').length : 0;
+
+  const projectsEl = document.querySelector('[data-stat="projects"]');
+  const certificatesEl = document.querySelector('[data-stat="certificates"]');
+  const rolesEl = document.querySelector('[data-stat="roles"]');
+
+  if (projectsEl) {
+    projectsEl.textContent = projectsCount;
+    projectsEl.setAttribute('data-target', projectsCount);
+  }
+  if (certificatesEl) {
+    certificatesEl.textContent = certificatesCount;
+    certificatesEl.setAttribute('data-target', certificatesCount);
+  }
+  if (rolesEl) {
+    rolesEl.textContent = rolesCount;
+    rolesEl.setAttribute('data-target', rolesCount);
+  }
+})();
+
 function animateCounter(el, target, duration = 1400) {
   let start = 0;
   const step = timestamp => {
