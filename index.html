@@ -168,67 +168,177 @@
         <p class="section-label">What I Know</p>
         <h2 class="section-title">My Skills</h2>
       </div>
-      <div class="skills-grid">
-        <div class="skill-card reveal">
-          <div class="skill-icon"><img src="assets/images/skills/html.png" alt="HTML"></div>
-          <h4>HTML</h4>
-          <p>Semantic Markup</p>
+      <div class="skills-category-group reveal">
+        <div class="category-header">
+          <h3 class="category-title">Frontend Development</h3>
+          <p class="category-subtitle">Building responsive and modern user interfaces.</p>
         </div>
-        <div class="skill-card reveal">
-          <div class="skill-icon"><img src="assets/images/skills/css.png" alt="CSS"></div>
-          <h4>CSS</h4>
-          <p>Styling &amp; Layout</p>
+        <div class="carousel-container skills-carousel" id="frontend-carousel" data-cards-desktop="6" data-cards-tablet="4" data-cards-mobile="2">
+          <button class="carousel-nav-btn prev-btn" aria-label="Previous skill" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          
+          <div class="carousel-track-viewport">
+            <div class="carousel-track skills-carousel-track" id="frontend-track">
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="assets/images/skills/html.png" alt="HTML"></div>
+                <h4>HTML</h4>
+                <p>Semantic Markup</p>
+              </div>
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="assets/images/skills/css.png" alt="CSS"></div>
+                <h4>CSS</h4>
+                <p>Styling &amp; Layout</p>
+              </div>
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="assets/images/skills/javascript.png" alt="JavaScript"></div>
+                <h4>JavaScript</h4>
+                <p>Logic &amp; Interactivity</p>
+              </div>
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="assets/images/skills/react.png" alt="React"></div>
+                <h4>React</h4>
+                <p>Hooks · Router · Real-time</p>
+              </div>
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="https://cdn.simpleicons.org/typescript/3178C6" alt="TypeScript"></div>
+                <h4>TypeScript</h4>
+                <p>Type-Safe JS</p>
+              </div>
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="Tailwind CSS"></div>
+                <h4>Tailwind CSS</h4>
+                <p>Utility-First CSS</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="carousel-nav-btn next-btn" aria-label="Next skill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
         </div>
-        <div class="skill-card reveal">
-          <div class="skill-icon"><img src="assets/images/skills/javascript.png" alt="JavaScript"></div>
-          <h4>JavaScript</h4>
-          <p>Logic &amp; Interactivity</p>
+        <div class="carousel-dots-container" id="frontend-dots"></div>
+      </div>
+
+      <div class="skills-category-group reveal">
+        <div class="category-header">
+          <h3 class="category-title">Backend &amp; Development</h3>
+          <p class="category-subtitle">Building scalable applications and data-driven experiences.</p>
         </div>
-        <div class="skill-card reveal">
-          <div class="skill-icon"><img src="assets/images/skills/react.png" alt="React"></div>
-          <h4>React</h4>
-          <p>Component UI</p>
+        <div class="carousel-container skills-carousel" id="backend-carousel" data-cards-desktop="6" data-cards-tablet="4" data-cards-mobile="2">
+          <button class="carousel-nav-btn prev-btn" aria-label="Previous skill" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          
+          <div class="carousel-track-viewport">
+            <div class="carousel-track skills-carousel-track" id="backend-track">
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="assets/images/skills/python.png" alt="Python"></div>
+                <h4>Python</h4>
+                <p>Programming</p>
+              </div>
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="https://cdn.simpleicons.org/firebase/FFCA28" alt="Firebase"></div>
+                <h4>Firebase</h4>
+                <p>Auth &amp; Firestore</p>
+              </div>
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="https://cdn.simpleicons.org/vite/646CFF" alt="Vite"></div>
+                <h4>Vite</h4>
+                <p>Build Tool</p>
+              </div>
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="https://cdn.simpleicons.org/pwa/5A0FC8" alt="PWA"></div>
+                <h4>PWA</h4>
+                <p>Progressive Web App</p>
+              </div>
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="https://cdn.simpleicons.org/react/22D3EE" alt="Recharts"></div>
+                <h4>Recharts</h4>
+                <p>Data Visualisation</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="carousel-nav-btn next-btn" aria-label="Next skill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
         </div>
-        <div class="skill-card reveal">
-          <div class="skill-icon"><img src="assets/images/skills/figma.png" alt="Figma"></div>
-          <h4>UI Design</h4>
-          <p>Figma &amp; Prototyping</p>
+        <div class="carousel-dots-container" id="backend-dots"></div>
+      </div>
+
+      <div class="skills-category-group reveal">
+        <div class="category-header">
+          <h3 class="category-title">Tools &amp; Workflow</h3>
+          <p class="category-subtitle">Version control, collaboration, and workflow automation.</p>
         </div>
-        <div class="skill-card reveal">
-          <div class="skill-icon"><img src="assets/images/skills/git.png" alt="Git"></div>
-          <h4>Git</h4>
-          <p>Version Control</p>
+        <div class="carousel-container skills-carousel" id="tools-carousel" data-cards-desktop="6" data-cards-tablet="4" data-cards-mobile="2">
+          <button class="carousel-nav-btn prev-btn" aria-label="Previous skill" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          
+          <div class="carousel-track-viewport">
+            <div class="carousel-track skills-carousel-track" id="tools-track">
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="assets/images/skills/git.png" alt="Git"></div>
+                <h4>Git</h4>
+                <p>Version Control</p>
+              </div>
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="https://cdn.simpleicons.org/github/white" alt="GitHub"></div>
+                <h4>GitHub</h4>
+                <p>Collaboration Platform</p>
+              </div>
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="https://cdn.simpleicons.org/n8n/EA4B71" alt="n8n"></div>
+                <h4>n8n</h4>
+                <p>Workflow Automation</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="carousel-nav-btn next-btn" aria-label="Next skill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
         </div>
-        <div class="skill-card reveal">
-          <div class="skill-icon"><img src="assets/images/skills/canva.png" alt="Canva"></div>
-          <h4>Canva</h4>
-          <p>Design &amp; Content</p>
+        <div class="carousel-dots-container" id="tools-dots"></div>
+      </div>
+
+      <div class="skills-category-group reveal">
+        <div class="category-header">
+          <h3 class="category-title">UI / Graphic Design</h3>
+          <p class="category-subtitle">Designing intuitive interfaces and visual content.</p>
         </div>
-        <div class="skill-card reveal">
-          <div class="skill-icon"><img src="assets/images/skills/photoshop.png" alt="Photoshop"></div>
-          <h4>Photoshop</h4>
-          <p>Graphic Editing</p>
+        <div class="carousel-container skills-carousel" id="design-carousel" data-cards-desktop="6" data-cards-tablet="4" data-cards-mobile="2">
+          <button class="carousel-nav-btn prev-btn" aria-label="Previous skill" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          
+          <div class="carousel-track-viewport">
+            <div class="carousel-track skills-carousel-track" id="design-track">
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="assets/images/skills/figma.png" alt="Figma"></div>
+                <h4>UI Design</h4>
+                <p>Figma &amp; Prototyping</p>
+              </div>
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="assets/images/skills/canva.png" alt="Canva"></div>
+                <h4>Canva</h4>
+                <p>Design &amp; Content</p>
+              </div>
+              <div class="skill-card reveal">
+                <div class="skill-icon"><img src="assets/images/skills/photoshop.png" alt="Photoshop"></div>
+                <h4>Photoshop</h4>
+                <p>Graphic Editing</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="carousel-nav-btn next-btn" aria-label="Next skill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
         </div>
-        <div class="skill-card reveal">
-          <div class="skill-icon"><img src="assets/images/skills/python.png" alt="Python"></div>
-          <h4>Python</h4>
-          <p>Programming</p>
-        </div>
-        <div class="skill-card reveal">
-          <div class="skill-icon"><img src="https://cdn.simpleicons.org/n8n/EA4B71" alt="n8n"></div>
-          <h4>n8n</h4>
-          <p>Workflow Automation</p>
-        </div>
-        <div class="skill-card reveal">
-          <div class="skill-icon"><img src="https://cdn.simpleicons.org/github/white" alt="GitHub"></div>
-          <h4>GitHub</h4>
-          <p>Collaboration Platform</p>
-        </div>
-        <div class="skill-card reveal">
-          <div class="skill-icon"><img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="Tailwind CSS"></div>
-          <h4>Tailwind CSS</h4>
-          <p>Utility-First CSS</p>
-        </div>
+        <div class="carousel-dots-container" id="design-dots"></div>
       </div>
     </div>
   </section>

@@ -567,9 +567,17 @@ document.head.appendChild(rippleStyle);
     // Determine card count per page based on viewport size
     function getCardsPerPage() {
       const width = window.innerWidth;
-      if (width >= 1025) return 3;
-      if (width >= 769) return 2;
-      return 1;
+      const desktop = parseInt(carousel.getAttribute('data-cards-desktop')) || 3;
+      const tablet = parseInt(carousel.getAttribute('data-cards-tablet')) || 2;
+      const mobile = parseInt(carousel.getAttribute('data-cards-mobile')) || 1;
+
+      const isSkills = carousel.classList.contains('skills-carousel');
+      const desktopBreakpoint = isSkills ? 1200 : 1025;
+      const tabletBreakpoint = isSkills ? 768 : 769;
+
+      if (width >= desktopBreakpoint) return desktop;
+      if (width >= tabletBreakpoint) return tablet;
+      return mobile;
     }
 
     // Generate pagination dots
@@ -599,6 +607,14 @@ document.head.appendChild(rippleStyle);
       dotsWrapper.appendChild(activeDot);
 
       dotsContainer.appendChild(dotsWrapper);
+
+      // Hide dots container if only 1 page of cards (all fit)
+      if (numDots <= 1) {
+        dotsContainer.style.display = 'none';
+      } else {
+        dotsContainer.style.display = 'flex';
+      }
+
       syncCarouselState();
     }
 
@@ -777,7 +793,11 @@ document.head.appendChild(rippleStyle);
     });
   }
 
-  // Initialize both carousels
+  // Initialize all carousels
   setupCarousel('projects-carousel', 'projects-track', 'projects-dots');
   setupCarousel('certificates-carousel', 'certificates-track', 'certificates-dots');
+  setupCarousel('frontend-carousel', 'frontend-track', 'frontend-dots');
+  setupCarousel('backend-carousel', 'backend-track', 'backend-dots');
+  setupCarousel('tools-carousel', 'tools-track', 'tools-dots');
+  setupCarousel('design-carousel', 'design-track', 'design-dots');
 })();

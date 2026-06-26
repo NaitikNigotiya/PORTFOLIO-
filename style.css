@@ -1120,6 +1120,108 @@ body::before {
 }
 
 /* ════════════════════════════════════════════════════════════
+   SKILLS CATEGORIES & CAROUSELS
+   ════════════════════════════════════════════════════════════ */
+.skills-category-group {
+  margin-bottom: 36px; /* Further reduced vertical spacing between categories */
+}
+
+.skills-category-group:last-child {
+  margin-bottom: 0;
+}
+
+.category-header {
+  margin-bottom: 12px; /* Brought header closer to the carousel */
+  position: relative;
+}
+
+.category-title {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: 800; /* Bolder appearance */
+  color: var(--red-200); /* Premium red accent color */
+  letter-spacing: -0.01em;
+  margin-bottom: 4px; /* Reduced spacing between heading and description slightly */
+}
+
+.category-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary); /* Muted gray color */
+  font-weight: 400;
+  max-width: 600px;
+}
+
+.skills-carousel {
+  margin-top: 12px !important; /* Override global 36px margin to tighten spacing */
+}
+
+.skills-category-group .carousel-dots-container {
+  margin-top: 12px; /* Move pagination dots closer to the carousel */
+}
+
+/* Skills specific carousel track layout */
+.skills-carousel-track {
+  gap: 20px !important;
+}
+
+.skills-carousel-track .skill-card {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: calc((100% - 5 * 20px) / 6); /* Default desktop (≥1200px): 6 cards */
+}
+
+/* Staggered animation delays for up to 6 cards inside each category */
+.skills-carousel-track .skill-card:nth-child(1) { transition-delay: 0.05s; }
+.skills-carousel-track .skill-card:nth-child(2) { transition-delay: 0.1s; }
+.skills-carousel-track .skill-card:nth-child(3) { transition-delay: 0.15s; }
+.skills-carousel-track .skill-card:nth-child(4) { transition-delay: 0.2s; }
+.skills-carousel-track .skill-card:nth-child(5) { transition-delay: 0.25s; }
+.skills-carousel-track .skill-card:nth-child(6) { transition-delay: 0.3s; }
+
+/* Responsive adjustments for skills cards */
+@media (min-width: 1200px) {
+  .skills-carousel-track .skill-card {
+    width: calc((100% - 5 * 20px) / 6); /* Desktop (≥1200px): 6 cards */
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
+  .skills-carousel-track .skill-card {
+    width: calc((100% - 3 * 20px) / 4); /* Tablet (768px–1199px): 4 cards */
+  }
+}
+
+@media (max-width: 767px) {
+  .skills-carousel-track .skill-card {
+    width: calc((100% - 20px) / 2); /* Mobile (<768px): 2 cards */
+  }
+  
+  .skills-category-group {
+    margin-bottom: 24px; /* Further reduced spacing between categories on mobile */
+  }
+  
+  .skills-carousel {
+    margin-top: 8px !important; /* Tightened carousel margin on mobile */
+  }
+  
+  .skills-category-group .carousel-dots-container {
+    margin-top: 8px; /* Pagination dots closer on mobile */
+  }
+  
+  .category-header {
+    margin-bottom: 8px; /* Tightened header margin on mobile */
+  }
+  
+  .category-title {
+    font-size: 1.25rem;
+  }
+  
+  .category-subtitle {
+    font-size: 0.85rem;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
    SERVICES
    ════════════════════════════════════════════════════════════ */
 .services-grid {
@@ -2973,54 +3075,7 @@ body::before {
   transform: translateY(0);
 }
 
-/* Staggered children */
-.skills-grid .skill-card:nth-child(1) {
-  transition-delay: 0.05s;
-}
-
-.skills-grid .skill-card:nth-child(2) {
-  transition-delay: 0.1s;
-}
-
-.skills-grid .skill-card:nth-child(3) {
-  transition-delay: 0.15s;
-}
-
-.skills-grid .skill-card:nth-child(4) {
-  transition-delay: 0.2s;
-}
-
-.skills-grid .skill-card:nth-child(5) {
-  transition-delay: 0.25s;
-}
-
-.skills-grid .skill-card:nth-child(6) {
-  transition-delay: 0.3s;
-}
-
-.skills-grid .skill-card:nth-child(7) {
-  transition-delay: 0.35s;
-}
-
-.skills-grid .skill-card:nth-child(8) {
-  transition-delay: 0.4s;
-}
-
-.skills-grid .skill-card:nth-child(9) {
-  transition-delay: 0.45s;
-}
-
-.skills-grid .skill-card:nth-child(10) {
-  transition-delay: 0.5s;
-}
-
-.skills-grid .skill-card:nth-child(11) {
-  transition-delay: 0.55s;
-}
-
-.skills-grid .skill-card:nth-child(12) {
-  transition-delay: 0.6s;
-}
+/* Staggered children for carousels are defined in their respective carousel styles */
 
 /* ════════════════════════════════════════════════════════════
    LIGHTBOX
