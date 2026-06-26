@@ -474,3 +474,310 @@ document.head.appendChild(rippleStyle);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 })();
+
+
+// ════════════════════════════════════════════════════════════
+// CARD DESCRIPTION SCROLLING & FADE EFFECTS
+// ════════════════════════════════════════════════════════════
+(function initCardDescriptions() {
+  const scrollContainers = document.querySelectorAll('.project-desc, .certificate-desc');
+
+  scrollContainers.forEach(container => {
+    const parent = container.parentElement;
+    const fade = parent.querySelector('.gradient-fade');
+    if (!fade) return;
+
+    function updateFade() {
+      const isOverflowing = container.scrollHeight > container.clientHeight;
+      const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 2;
+
+      if (isOverflowing && !isAtBottom) {
+        fade.classList.remove('hidden');
+      } else {
+        fade.classList.add('hidden');
+      }
+    }
+
+    // Update on scroll, resize, and initially
+    container.addEventListener('scroll', updateFade);
+    window.addEventListener('resize', updateFade);
+
+    // Hide fade while actively scrolling
+    let scrollTimer;
+    container.addEventListener('scroll', () => {
+      fade.classList.add('scrolling');
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        fade.classList.remove('scrolling');
+        updateFade();
+      }, 150); // Short delay to restore fade after scrolling stops
+    });
+
+    // Check after layout and potential image loads
+    setTimeout(updateFade, 100);
+    setTimeout(updateFade, 600);
+
+    // Safety check: update fade when entering or leaving the card
+    const card = container.closest('.project-card, .certificate-card');
+    if (card) {
+      card.addEventListener('mouseenter', updateFade);
+      card.addEventListener('mouseleave', updateFade);
+    }
+  });
+})();
+
+
+// ════════════════════════════════════════════════════════════
+// CAROUSEL CONTROLLER & AUTOMATIC DATE SORTING
+// ════════════════════════════════════════════════════════════
+(function initCarousels() {
+  // 1. Sort elements by data-date (Descending - Newest first)
+  function sortCarouselCards(trackId) {
+    const track = document.getElementById(trackId);
+    if (!track) return;
+    const cards = Array.from(track.children);
+    cards.sort((a, b) => {
+      const dateA = a.getAttribute('data-date') || '1970-01';
+      const dateB = b.getAttribute('data-date') || '1970-01';
+      return dateB.localeCompare(dateA); // Descending
+    });
+    // Clear and re-append in sorted order
+    track.innerHTML = '';
+    cards.forEach(card => track.appendChild(card));
+  }
+
+  // Sort both projects and certificates
+  sortCarouselCards('projects-track');
+  sortCarouselCards('certificates-track');
+
+  // 2. Setup Carousel functionality
+  function setupCarousel(carouselId, trackId, dotsContainerId) {
+    const carousel = document.getElementById(carouselId);
+    const track = document.getElementById(trackId);
+    const dotsContainer = document.getElementById(dotsContainerId);
+    if (!carousel || !track || !dotsContainer) return;
+
+    const viewport = track.parentElement;
+    const prevBtn = carousel.querySelector('.prev-btn');
+    const nextBtn = carousel.querySelector('.next-btn');
+
+    let cards = Array.from(track.children);
+    if (cards.length === 0) return;
+
+    // Determine card count per page based on viewport size
+    function getCardsPerPage() {
+      const width = window.innerWidth;
+      if (width >= 1025) return 3;
+      if (width >= 769) return 2;
+      return 1;
+    }
+
+    // Generate pagination dots
+    let dotsWrapper = null;
+    function updateDots() {
+      dotsContainer.innerHTML = '';
+      const cardsPerPage = getCardsPerPage();
+      const numDots = Math.max(1, cards.length - cardsPerPage + 1);
+
+      // Create dots wrapper
+      dotsWrapper = document.createElement('div');
+      dotsWrapper.className = 'carousel-dots-wrapper';
+
+      // Create individual dots
+      for (let i = 0; i < numDots; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'carousel-dot';
+        dot.addEventListener('click', () => {
+          scrollToIndex(i);
+        });
+        dotsWrapper.appendChild(dot);
+      }
+
+      // Create active sliding dot indicator
+      const activeDot = document.createElement('span');
+      activeDot.className = 'carousel-dot-active';
+      dotsWrapper.appendChild(activeDot);
+
+      dotsContainer.appendChild(dotsWrapper);
+      syncCarouselState();
+    }
+
+    // Scroll to a specific card index
+    function scrollToIndex(index) {
+      if (cards.length === 0) return;
+      const cardWidth = cards[0].offsetWidth;
+      const gap = parseInt(window.getComputedStyle(track).gap) || 28;
+      const scrollTarget = index * (cardWidth + gap);
+      
+      viewport.scrollTo({
+        left: scrollTarget,
+        behavior: 'smooth'
+      });
+    }
+
+    // Sync arrow visibility and active dot animation on scroll
+    function syncCarouselState() {
+      if (cards.length === 0) return;
+      const scrollLeft = viewport.scrollLeft;
+      const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth;
+      const cardWidth = cards[0].offsetWidth;
+      const gap = parseInt(window.getComputedStyle(track).gap) || 28;
+      const cardStep = cardWidth + gap;
+
+      // Update active dot index
+      const activeIndex = Math.min(
+        Math.max(0, Math.round(scrollLeft / cardStep)),
+        cards.length - getCardsPerPage()
+      );
+
+      // Slide the active dot indicator
+      const activeIndicator = dotsWrapper ? dotsWrapper.querySelector('.carousel-dot-active') : null;
+      if (activeIndicator) {
+        // Distance between dot centers is dot width (8px) + gap (12px) = 20px
+        const dotStep = 20;
+        activeIndicator.style.transform = `translateX(${activeIndex * dotStep}px)`;
+      }
+
+      // Sync navigation arrows visibility
+      if (prevBtn) {
+        if (scrollLeft <= 10) {
+          prevBtn.classList.add('carousel-nav-hidden');
+          prevBtn.setAttribute('disabled', 'true');
+        } else {
+          prevBtn.classList.remove('carousel-nav-hidden');
+          prevBtn.removeAttribute('disabled');
+        }
+      }
+
+      if (nextBtn) {
+        if (scrollLeft >= maxScrollLeft - 10) {
+          nextBtn.classList.add('carousel-nav-hidden');
+          nextBtn.setAttribute('disabled', 'true');
+        } else {
+          nextBtn.classList.remove('carousel-nav-hidden');
+          nextBtn.removeAttribute('disabled');
+        }
+      }
+    }
+
+    // Arrow Button Handlers
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const cardWidth = cards[0].offsetWidth;
+        const gap = parseInt(window.getComputedStyle(track).gap) || 28;
+        const cardStep = cardWidth + gap;
+        const currentIndex = Math.round(viewport.scrollLeft / cardStep);
+        scrollToIndex(Math.max(0, currentIndex - 1));
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const cardWidth = cards[0].offsetWidth;
+        const gap = parseInt(window.getComputedStyle(track).gap) || 28;
+        const cardStep = cardWidth + gap;
+        const currentIndex = Math.round(viewport.scrollLeft / cardStep);
+        const cardsPerPage = getCardsPerPage();
+        scrollToIndex(Math.min(cards.length - cardsPerPage, currentIndex + 1));
+      });
+    }
+
+    // Touch, trackpad, scroll events sync state
+    viewport.addEventListener('scroll', syncCarouselState, { passive: true });
+
+    // Mouse Drag Support
+    let isDragging = false;
+    let startX = 0;
+    let scrollLeftStart = 0;
+    let dragVelocity = 0;
+    let lastTime = 0;
+    let lastX = 0;
+
+    viewport.addEventListener('mousedown', (e) => {
+      // Don't drag if clicking buttons or links
+      if (e.target.closest('a') || e.target.closest('button')) return;
+      isDragging = true;
+      startX = e.pageX - viewport.offsetLeft;
+      scrollLeftStart = viewport.scrollLeft;
+      viewport.style.scrollBehavior = 'auto';
+      viewport.style.scrollSnapType = 'none';
+      viewport.style.cursor = 'grabbing';
+      
+      lastX = e.pageX;
+      lastTime = performance.now();
+      dragVelocity = 0;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - viewport.offsetLeft;
+      const walk = (x - startX) * 1.5; // Drag sensitivity multiplier
+      viewport.scrollLeft = scrollLeftStart - walk;
+
+      // Calculate velocity
+      const now = performance.now();
+      const dt = now - lastTime;
+      const dx = e.pageX - lastX;
+      if (dt > 0) {
+        dragVelocity = dx / dt;
+      }
+      lastX = e.pageX;
+      lastTime = now;
+    });
+
+    const endDrag = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      viewport.style.cursor = '';
+      viewport.style.scrollBehavior = 'smooth';
+      viewport.style.scrollSnapType = 'x mandatory';
+
+      // Snap to nearest card based on scroll position and inertia
+      const cardWidth = cards[0].offsetWidth;
+      const gap = parseInt(window.getComputedStyle(track).gap) || 28;
+      const cardStep = cardWidth + gap;
+      
+      // Calculate projected scroll based on velocity
+      const inertiaFactor = 150; // inertia factor
+      const projectedScrollLeft = viewport.scrollLeft - (dragVelocity * inertiaFactor);
+      
+      let targetIndex = Math.round(projectedScrollLeft / cardStep);
+      const cardsPerPage = getCardsPerPage();
+      targetIndex = Math.min(cards.length - cardsPerPage, Math.max(0, targetIndex));
+      
+      scrollToIndex(targetIndex);
+    };
+
+    window.addEventListener('mouseup', endDrag);
+    viewport.addEventListener('mouseleave', endDrag);
+
+    // Keyboard Arrow Navigation Support
+    carousel.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevBtn && prevBtn.click();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextBtn && nextBtn.click();
+      }
+    });
+    // Make container focusable so keyboard navigation works
+    carousel.setAttribute('tabindex', '0');
+    
+    // Initial setup and resize handler
+    updateDots();
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        cards = Array.from(track.children);
+        updateDots();
+      }, 100);
+    });
+  }
+
+  // Initialize both carousels
+  setupCarousel('projects-carousel', 'projects-track', 'projects-dots');
+  setupCarousel('certificates-carousel', 'certificates-track', 'certificates-dots');
+})();
