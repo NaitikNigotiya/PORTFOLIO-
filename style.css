@@ -1735,7 +1735,7 @@ body::before {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 10px; /* Consistent horizontal and vertical gaps */
-  margin-bottom: 26px; /* Increased vertical spacing to buttons for breathing room */
+  margin-bottom: 12px; /* Decreased vertical spacing to buttons for tighter alignment */
   align-items: center;
 }
 
@@ -3274,6 +3274,10 @@ body::before {
   }
 
   /* Layout stacks */
+  .hero {
+    padding-top: 110px;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
     text-align: center;
@@ -3414,7 +3418,7 @@ body::before {
    ════════════════════════════════════════════════════════════ */
 @media (max-width: 640px) {
   .hero {
-    padding-top: 88px;
+    padding-top: 120px;
     padding-bottom: 48px;
   }
 
