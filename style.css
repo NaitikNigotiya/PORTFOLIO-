@@ -3384,14 +3384,16 @@ body::before {
   }
 
   .about-stats {
-    gap: 10px; /* Reduced gap on mobile to maximize card width */
-    margin-top: 28px;
+    gap: 14px; /* Increased gap to look more premium */
+    margin-top: 32px;
     align-items: stretch; /* Ensures equal height for all cards */
+    width: 100%;
+    max-width: 420px; /* Center-aligned and constrained width for better layout */
   }
 
   .stat-card {
-    padding: 16px 6px; /* Compact side padding to fit text labels */
-    min-width: 80px;
+    padding: 22px 12px; /* Increased padding for larger, premium cards */
+    min-width: 90px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -3399,17 +3401,17 @@ body::before {
   }
 
   .stat-label {
-    font-size: 0.6rem; /* Slightly smaller size for readability and fit */
-    letter-spacing: 0.5px; /* Tighter letter spacing to prevent overflow */
-    margin-top: 4px;
-    word-break: break-word; /* Wrap cleanly if necessary */
+    font-size: 0.72rem; /* Matches desktop font size for readability */
+    letter-spacing: 0.8px;
+    margin-top: 6px;
+    word-break: break-word;
     overflow-wrap: break-word;
     white-space: normal;
     line-height: 1.25;
   }
 
   .stat-number {
-    font-size: clamp(1.2rem, 4vw, 1.7rem); /* Responsive, clean number sizing */
+    font-size: clamp(1.8rem, 5vw, 2.2rem); /* Increased size for strong visual hierarchy */
   }
 }
 
@@ -3643,7 +3645,11 @@ body::before {
   .about-stats {
     flex-direction: column;
     gap: 12px;
-    align-items: center;
+    align-items: stretch;
+    width: 100%;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hero-ctas .btn {
