@@ -3570,6 +3570,11 @@ body::before {
     padding: 60px 0;
   }
 
+  .hero {
+    padding-top: 120px;
+    padding-bottom: 48px;
+  }
+
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
