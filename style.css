@@ -645,6 +645,15 @@ body::before {
   box-shadow: var(--sku-shadow-pressed);
 }
 
+/* Disabled button state */
+.btn.disabled,
+.btn:disabled {
+  opacity: 0.65;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+
 /* Ghost */
 .btn-ghost {
   background: transparent;
