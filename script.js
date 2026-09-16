@@ -211,7 +211,8 @@ const lightboxCaption = lightbox.querySelector('.lightbox-caption');
 const lightboxClose   = lightbox.querySelector('.lightbox-close');
 
 document.querySelectorAll('.certificate-card').forEach(card => {
-  card.addEventListener('click', () => {
+  card.addEventListener('click', (e) => {
+    if (e.target.closest('a')) return;
     const img   = card.querySelector('img');
     const title = card.querySelector('h3').textContent;
     lightboxImg.src = img.src;
